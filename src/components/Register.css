@@ -1,0 +1,142 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+}
+
+.register-content {
+  animation: fadeIn 1s ease-in;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 20px;
+}
+
+.register-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.register-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.register-input {
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.register-input:focus {
+  outline: none;
+  background: white;
+}
+
+.register-btn {
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: white;
+  color: #667eea;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-top: 0.5rem;
+}
+
+.register-btn:hover {
+  background: #5a67d8;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.back-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px auto 0;
+  font-size: 1rem;
+}
+
+.back-button:hover {
+  background: white;
+  color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.privacy-notice {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Para móviles */
+@media (max-width: 768px) {
+  .register-title {
+    font-size: 2rem;
+  }
+  
+  .register-subtitle {
+    font-size: 1rem;
+  }
+  
+  .register-input, .register-btn {
+    padding: 12px;
+  }
+}
+/* Estilos para los campos de contraseña con ojito */
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-input {
+  padding-right: 50px !important;
+  width: 100%;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.password-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
