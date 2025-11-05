@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { useAuth } from '../context/AuthContext';
 import './Register.css';
 
 const Register = ({ navigateTo }) => {
@@ -13,6 +12,7 @@ const Register = ({ navigateTo }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { register } = useAuth();
 
   const handleChange = (e) => {
     setFormData({
@@ -39,9 +39,9 @@ const Register = ({ navigateTo }) => {
     }
 
     try {
-      // Crear usuario con Firebase
-      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      
+      // Crear usuario usando el AuthContext
+      await register(formData.email, formData.password);
+
       // Si todo sale bien, mostrar pantalla de éxito
       navigateTo('success');
     } catch (error) {

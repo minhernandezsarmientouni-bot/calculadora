@@ -34,9 +34,9 @@ const SuccessScreen = ({ navigateTo }) => {
         <div className="success-icon">🎉</div>
         <h1 className="success-title">¡Cuenta Registrada con Éxito!</h1>
         <p className="success-message">Bienvenido a Kuali</p>
-        <button 
+        <button
           className="success-btn"
-          onClick={() => navigateTo('dashboard')}
+          onClick={() => navigateTo('home')}
         >
           Continuar
         </button>
