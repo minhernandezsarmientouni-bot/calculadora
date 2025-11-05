@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../firebase';
+import { useAuth } from '../context/AuthContext';
 import './ForgotPassword.css';
 
 const ForgotPassword = ({ navigateTo }) => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const { resetPassword } = useAuth();
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ const ForgotPassword = ({ navigateTo }) => {
     setMessage('');
 
     try {
-      await sendPasswordResetEmail(auth, email);
+      await resetPassword(email);
       setMessage('¡Correo de recuperación enviado! Revisa tu bandeja de entrada.');
     } catch (error) {
       console.error('Error al enviar correo:', error);

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { useAuth } from '../context/AuthContext';
 import './Login.css';
 
 const Login = ({ navigateTo }) => {
@@ -10,6 +9,7 @@ const Login = ({ navigateTo }) => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setFormData({
@@ -23,11 +23,11 @@ const Login = ({ navigateTo }) => {
     setLoading(true);
 
     try {
-      // Iniciar sesión con Firebase
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      
-      // Si todo sale bien, ir al dashboard
-      navigateTo('dashboard');
+      // Iniciar sesión usando el AuthContext
+      await login(formData.email, formData.password);
+
+      // Si todo sale bien, ir al home
+      navigateTo('home');
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       alert('Error: ' + error.message);

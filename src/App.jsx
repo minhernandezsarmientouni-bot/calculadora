@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from './context/AuthContext';
 import SplashScreen from './components/SplashScreen';
-import LandingPage from './components/LandingPage';
-import Login from './components/Login';
-import Register from './components/Register';
-import Dashboard from './components/Dashboard';
-import ForgotPassword from './components/ForgotPassword';
-import SuccessScreen from './components/SuccessScreen';
-import './App.css';
+import LandingPage from './pages/LandingPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import ForgotPassword from './pages/ForgotPassword';
+import SuccessScreen from './pages/SuccessScreen';
+import './styles/App.css';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('splash');
+  const { currentUser } = useAuth();
 
-  // Cambiar a landing después de 3 segundos
+  // Cambiar a landing o home después de 3 segundos (dependiendo si hay sesión)
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCurrentScreen('landing');
+      if (currentUser) {
+        setCurrentScreen('home');
+      } else {
+        setCurrentScreen('landing');
+      }
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [currentUser]);
+
+  // Verificar si el usuario ya está autenticado cuando cambia el estado de auth
+  useEffect(() => {
+    if (currentUser && currentScreen !== 'splash' && currentScreen !== 'home') {
+      setCurrentScreen('home');
+    } else if (!currentUser && currentScreen === 'home') {
+      setCurrentScreen('landing');
+    }
+  }, [currentUser]);
 
   // Función para navegar
   const navigateTo = (screen) => {
@@ -42,8 +57,8 @@ function App() {
     return <Register navigateTo={navigateTo} />;
   }
 
-  if (currentScreen === 'dashboard') {
-    return <Dashboard navigateTo={navigateTo} />;
+  if (currentScreen === 'home') {
+    return <Home navigateTo={navigateTo} />;
   }
 
   if (currentScreen === 'forgot-password') {
